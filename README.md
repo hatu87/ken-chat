@@ -6,7 +6,7 @@ Submitted by: **Tu Hoang**
 
 Time spent: **X** hours
 
-URL: **Insert your Heroku URL here**
+URL: **https://ken-chat.herokuapp.com**
 
 ## User Stories
 
