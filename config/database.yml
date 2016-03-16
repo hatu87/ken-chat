@@ -80,7 +80,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
   database: ken-chat_production
   username: ken-chat
   password: <%= ENV['KEN-CHAT_DATABASE_PASSWORD'] %>
