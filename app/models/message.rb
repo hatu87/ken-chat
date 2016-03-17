@@ -5,4 +5,5 @@ class Message < ActiveRecord::Base
   has_and_belongs_to_many :recipients, class_name: :User,
     association_foreign_key: :recipient_id, join_table: :message_recipients
 
+  validates :sender, presence: true
 end

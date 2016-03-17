@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <%= form_for @user, class: 'col s12' do |f| %>
+    <div class="card">
+      <div class="card-content">
+        <h4 class="activator grey-text text-darken-4">Register</h4>
+        <p>Get your new account</p>
+        <% if flash[:error] %>
+  <%= flash[:error] %>
+<% end %>
+      </div>
+      <div class="card-content ">
+        <div class="row">
+
+          <div class="input-field col s12">
+            <i class="material-icons prefix">account_circle</i>
+            <%= f.text_field :name, class:'validate', 'required':'true' %>
+            <%= f.label :name%>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <%= f.email_field :email, class:'validate' %>
+            <%= f.label :email%>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">lock_open</i>
+            <%= f.password_field :password, class:'validate' %>
+            <%= f.label :password %>
+          </div>
+          <div class="input-field col s6">
+            <%= f.password_field :password_confirmation, class:'validate' %>
+            <%= f.label :password_confirmation, 'Confirm password' %>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-action">
+        <%= f.submit 'Register', class: 'waves-effect waves-light btn'%>
+        <button type="reset" class="grey waves-effect waves-light btn">Reset</button>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

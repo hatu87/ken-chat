@@ -1,0 +1,22 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.input-field {
+  .prefix ~ .field_with_errors {
+    input {
+      margin-left: 3rem;
+      width: 92%;
+      width: calc(100% - 3rem);
+    }
+    label {
+      margin-left: 3rem;
+      width: 92%;
+      width: calc(100% - 3rem);
+
+      .active {
+        font-size: 0.8rem;
+        transform: translateY(-140%);
+      }
+    }
+  }
+}
