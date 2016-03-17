@@ -1,6 +1,7 @@
 @import "_fix_errors_layout";
 
-.remove-z {
+.guest{
+  .remove-z {
   z-index: 0
 }
 
@@ -53,3 +54,5 @@ p {
 footer.page-footer {
   margin: 0;
 }
+}
+

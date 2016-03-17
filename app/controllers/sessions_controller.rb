@@ -6,16 +6,27 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if User.where(login_params).count > 0
-      flash[:success] = 'Login suceessfully.'
-      redirect_to root_path
-    else
-      flash[:error] = 'Email or password is incorrectly.'
+    user = User.find_by_email(params[:email])
+    # byebug
+    begin
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        redirect_to user_messages_path(user.id)
+      else
+        flash[:error] = 'Email or password is incorrectly.'
+        render 'new'
+      end
+
+    rescue BCrypt::Errors::InvalidHash
+      Rails.logger.fatal "Invalid password of user with id #{user.id}"
+      flash[:error] = 'Your account is invalid. Please register a new account or contact our admin.'
       render 'new'
     end
   end
 
   def destroy
+    session[:user_id] = nil
+    redirect_to root_path
   end
 
   private

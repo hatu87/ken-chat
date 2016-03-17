@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessor :password_confirmation
 
+  has_secure_password
+
   # associations
   has_many :accounts
   has_many :sent_messages, foreign_key: :sender_id, class_name: :Message
