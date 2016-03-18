@@ -5,11 +5,11 @@
         <li>
           <div class="fixed-action-btn" style="bottom: 16px; right: 16px;">
             <%= link_to new_user_message_path, class:'btn-floating btn-large red' do %>
-              <i class="large material-icons">mode_edit</i>
+            <i class="large material-icons">mode_edit</i>
             <% end %>
-
           </div>
         </li>
+        <li><%= link_to 'Incomming Messages', user_messages_path %></li>
         <li><%= link_to 'Add Friends', user_friends_path %></li>
         <li><%= link_to 'Sent Messages', sent_user_messages_path %></li>
       </ul>
@@ -21,10 +21,14 @@
           <% @messages.each do |msg| %>
           <li class="collection-item avatar <%= unread_style(msg) %>">
             <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
+            <% if msg.unread? %>
+            <span class="badge">Unread</span>
+            <% else %>
+            <%= msg.read_at.to_formatted_s(:short) %>
+            <% end %>
             <span class="title"><%= msg.sender.name %></span>
-            <p><%= truncate(msg.content, separator: ' ') %>
+            <p><%= msg.content %>
             </p>
-            <a href="#!" class="secondary-content"><%= msg.created_at.to_formatted_s(:short) %></a>
           </li>
           <% end %>
         </ul>

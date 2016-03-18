@@ -10,6 +10,14 @@ class User < ActiveRecord::Base
     join_table: :message_recipients,
     foreign_key: :recipient_id
 
+  # list of friends
+  # has_many :friends, class_name: :User, through: :friends, foreign_key: 'friend_id'
+  has_and_belongs_to_many :friends, class_name: :User,
+    join_table: :friends,
+    foreign_key: :friend_id
+
+  # has_many :be_friends, class_name: :User, through: :friends
+
   # list of users who block this user
   has_and_belongs_to_many :blocking_users, class_name: :User,
     join_table: :blocks, foreign_key: :id
@@ -25,4 +33,13 @@ class User < ActiveRecord::Base
   validates :password, presence: true, confirmation: true
   validates :password_confirmation, presence: true
 
+  # scope
+  scope :except_current, -> (id) { where("id != ?", id) }
+
+  # custom functions
+
+  def friend?(friend)
+    # binding.pry
+    !friends.find_by_id(friend.id).nil?
+  end
 end

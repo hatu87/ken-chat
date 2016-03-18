@@ -11,6 +11,6 @@ class Message < ActiveRecord::Base
   scope :unread, -> { where(read_at: nil) }
 
   def unread?
-    unread.nil?
+    read_at.nil?
   end
 end

@@ -10,21 +10,22 @@
 
           </div>
         </li>
+        <li><%= link_to 'Incomming Messages', user_messages_path %></li>
         <li><%= link_to 'Add Friends', user_friends_path %></li>
-        <li><%= link_to 'Sent Messages', sent_user_messages_path %></li>
+        <li><%= link_to 'Sent Messages', '#' %></li>
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
     <div class="col s9">
       <div class="row">
         <ul class="collection ">
-          <% @messages.each do |msg| %>
-          <li class="collection-item avatar <%= unread_style(msg) %>">
-            <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
-            <span class="title"><%= msg.sender.name %></span>
-            <p><%= truncate(msg.content, separator: ' ') %>
-            </p>
-            <a href="#!" class="secondary-content"><%= msg.created_at.to_formatted_s(:short) %></a>
+          <% @friends.each do |friend| %>
+          <li class="collection-item avatar %>">
+            <%= image_tag friend.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
+            <span class="title"><%= friend.name %></span>
+            <% if !current_user.friend?(friend) %>
+            <a href="#!" class="secondary-content"><%= button_to 'Add Friend', user_friends_path, params:{friend_id: friend.id}, method: :post, class:'btn' %></a>
+            <% end %>
           </li>
           <% end %>
         </ul>

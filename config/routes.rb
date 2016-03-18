@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'messages/index'
-
   # root
   root 'home#index'
 
@@ -16,7 +13,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :messages do
-
+      get 'sent', to: 'messages#sent', on: :collection
     end
+
+    resources :friends
   end
 end
