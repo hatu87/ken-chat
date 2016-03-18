@@ -1,5 +1,34 @@
-  <div class="container">
-  <h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col s3">
+      <ul class="">
+        <li>
+          <div class="fixed-action-btn" style="bottom: 16px; right: 16px;">
+            <%= link_to new_user_message_path, class:'btn-floating btn-large red' do %>
+              <i class="large material-icons">mode_edit</i>
+            <% end %>
 
+          </div>
+        </li>
+        <li><%= link_to 'Add Friends', '#' %></li>
+        <li><%= link_to 'Sent Messages', '#' %></li>
+      </ul>
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+    </div>
+    <div class="col s9">
+      <div class="row">
+        <ul class="collection ">
+          <% @messages.each do |msg| %>
+          <li class="collection-item avatar <%= unread_style(msg) %>">
+            <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
+            <span class="title"><%= msg.sender.name %></span>
+            <p><%= msg.content %>
+            </p>
+            <a href="#!" class="secondary-content"><%= msg.created_at.to_formatted_s(:short) %></a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
   </div>
+</div>

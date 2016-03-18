@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <%= form_tag sessions_path, method: :post, class: 'col s12' do %>
+    <%= form_tag login_path, method: :post, class: 'col s12' do %>
     <div class="card">
       <div class="card-content">
         <h4 class="activator grey-text text-darken-4">Login</h4>
@@ -28,7 +28,7 @@
       </div>
       <div class="card-action">
         <%= submit_tag 'Login', class: 'waves-effect waves-light btn'%>
-        <%= link_to 'Register', new_user_path, class:'grey waves-effect waves-light btn' %>
+        <%= link_to 'Register', register_path, class:'grey waves-effect waves-light btn' %>
       </div>
     </div>
     <% end %>

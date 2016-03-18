@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  layout "guest"
+  skip_before_action :require_login, only: [:new, :create]
+  before_action :skip_if_signed_in, only: [:new, :create]
 
   def create
     @user = User.new(user_params)
     # byebug
     if @user.save
       flash[:success] = "User is created"
-      redirect_to new_session_path
+      redirect_to login_path
     else
       @user.password_confirmation = params[:user][:password_confirmation]
       flash[:error] = "Error: Registration fail."

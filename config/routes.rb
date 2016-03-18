@@ -6,12 +6,17 @@ Rails.application.routes.draw do
   root 'home#index'
 
   # authentication
-  resources :sessions do
-    collection do
-    end
-  end
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  post 'logout', to: 'sessions#destroy'
+  get 'register', to: 'users#new'
+  post 'register', to: 'users#create'
+
+  # current logged user
 
   resources :users do
-    resources :messages
+    resources :messages do
+
+    end
   end
 end

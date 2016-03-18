@@ -1,10 +1,14 @@
 class SessionsController < ApplicationController
-  layout "guest"
+  skip_before_action :require_login, only: [:new, :create]
+  before_action :skip_if_signed_in, only: [:new, :create]
+
+  # show login form
   def new
     @user = User.new
     render 'new'
   end
 
+  # login handler
   def create
     user = User.find_by_email(params[:email])
     # byebug
@@ -24,6 +28,7 @@ class SessionsController < ApplicationController
     end
   end
 
+  # logout
   def destroy
     session[:user_id] = nil
     redirect_to root_path

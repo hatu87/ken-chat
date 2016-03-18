@@ -6,4 +6,11 @@ class Message < ActiveRecord::Base
     association_foreign_key: :recipient_id, join_table: :message_recipients
 
   validates :sender, presence: true
+
+  scope :recent, -> { order(created_at: :desc) }
+  scope :unread, -> { where(read_at: nil) }
+
+  def unread?
+    unread.nil?
+  end
 end

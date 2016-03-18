@@ -1,44 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>KenChat</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>
+    Parallax Template - Materialize
+    </title>
+    <!-- CSS -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' =>
+    true %>
     <%= csrf_meta_tags %>
   </head>
-  <body class="customer">
-    <nav class="teal" role="navigation">
+  <body>
+    <nav class="<%= primary_color %>" role="navigation">
       <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo">Ken's Chat</a>
+        <%= link_to "Ken's Chat", root_path, class:"brand-logo #{nav_text_color}", id:'logo-container' %>
         <ul class="right hide-on-med-and-down">
+          <% if signed_in? %>
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">Signed in as <strong><%= current_user.email %></strong></a></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Logout', logout_path, method: :post %></li>
+          </ul>
+          <%= link_to "#", class: "dropdown-button #{nav_text_color}", 'data-activates':'dropdown1', 'data-beloworigin': "true", 'data-constrainwidth':'false' do %>
+          <%= current_user.name %><i class="material-icons right">arrow_drop_down</i>
+          <% end %>
+          <% else %>
           <li>
-            <%= link_to current_user.name %>
+            <%= link_to 'Login', login_path %>
+          </li>
+          <li>
+            <%= link_to 'Register', register_path %>
+          </li>
+          <% end %>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li>
+            <a href="#">
+              Navbar Link
+            </a>
           </li>
         </ul>
-        <ul id="nav-mobile" class="side-nav" style="left: -250px;">
-          <li><a href="#">Navbar Link</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse">
+          <i class="material-icons">
+          menu
+          </i>
+        </a>
       </div>
     </nav>
-    <main>
-    <%= yield %>
-    </main>
+    <div class="main">
+      <%= yield %>
+    </div>
+    <% unless signed_in? %>
     <footer class="page-footer teal">
-      <div class="container ">
+      <div class="container">
         <div class="row">
           <div class="col l6 s12">
-            <h5 class="white-text">Footer Content</h5>
-            <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            <h5 class="white-text">
+            Ken Hoang
+            </h5>
+            <p class="grey-text text-lighten-4">
+              I'm a lecturer in the University of Science, a researcher in Watermarking and Fingerprinting, and a freelance full-stack web developer. Ruby on Rails, NodeJs, AngularJs, ASP.NET, Database Analysis are my favorites technologies. Happy to see you.
+            </p>
+          </div>
+          <div class="col l3 s12">
+            <h5 class="white-text">
+            Connect
+            </h5>
+            <ul>
+              <% unless signed_in? %>
+              <li>
+                <%= link_to 'Login', login_path, class:'white-text' %>
+              </li>
+              <li>
+                <%= link_to 'Register', register_path, class:'white-text' %>
+              </li>
+              <% end %>
+              <li>
+                <%= link_to 'Home', root_path, class:'white-text' %>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
       <div class="footer-copyright">
         <div class="container">
-          © 2014 Copyright Text
-          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+          Made by
+          <a class="brown-text text-lighten-3" href="http://materializecss.com">
+            Materialize
+          </a>
         </div>
       </div>
     </footer>
+    <% end %>
+    <!-- Scripts -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' =>
+    true %>
   </body>
 </html>
