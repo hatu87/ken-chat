@@ -35,5 +35,5 @@ class ApplicationController < ActionController::Base
   end
 
 
-  helper_method :current_user, :signed_in?
+  helper_method :current_user, :signed_in?, :current_user_id
 end

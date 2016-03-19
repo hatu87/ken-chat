@@ -4,10 +4,9 @@
       <ul class="">
         <li>
           <div class="fixed-action-btn" style="bottom: 16px; right: 16px;">
-            <%= link_to new_user_message_path, class:'btn-floating btn-large red' do %>
-              <i class="large material-icons">mode_edit</i>
+            <%= link_to "#modal1", class:'btn-floating btn-large red modal-trigger' do %>
+            <i class="large material-icons">mode_edit</i>
             <% end %>
-
           </div>
         </li>
         <li><%= link_to 'Add Friends', user_friends_path %></li>
@@ -17,18 +16,52 @@
     </div>
     <div class="col s9">
       <div class="row">
-        <ul class="collection ">
+        <ul class="collapsible popout" data-collapsible="accordion">
           <% @messages.each do |msg| %>
-          <li class="collection-item avatar <%= unread_style(msg) %>">
-            <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
-            <span class="title"><%= msg.sender.name %></span>
-            <p><%= truncate(msg.content, separator: ' ') %>
-            </p>
-            <a href="#!" class="secondary-content"><%= msg.created_at.to_formatted_s(:short) %></a>
+          <li id="msg-<%=msg.id%>" class="<%= unread_style(msg) %>">
+            <%= link_to user_message_path(current_user_id, msg.id), class:'collapsible-header', remote:true do %>
+            <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle msg-avatar' %>
+            <span class="msg-title"><%= msg.sender.name %></span>
+            <div href="#!" class="right"><%= msg.created_at.to_formatted_s(:short) %></div>
+            <% end %>
+            <% if msg.unread? %>
+            <div class="collapsible-body"><p><%= msg.content %></p></div>
+            <% else %>
+            <div class="collapsible-body"><p>You have already read this message</p></div>
+            <% end %>
           </li>
           <% end %>
         </ul>
       </div>
     </div>
+  </div>
+</div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-fixed-footer">
+  <div class="modal-content">
+    <h4>New Message</h4>
+
+      <div class="row">
+        <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">From</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">To</label>
+        </div>
+      </div>
+    </form>
+      </div>
+    </form>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat teal ">Send</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
   </div>
 </div>

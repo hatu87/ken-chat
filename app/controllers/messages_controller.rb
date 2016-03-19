@@ -3,25 +3,19 @@ class MessagesController < ApplicationController
     user = User.find(params[:user_id])
     logged_user = current_user
 
-    # if current_user && user.id == logged_user.id
-      # get current users messages
-      @messages = user.received_messages.unread.recent
-    # else
-    #   redirect_to root_path
-    # end
+    @messages = user.received_messages.unread.recent
   end
 
   def sent
     user = User.find(params[:user_id])
     logged_user = current_user
 
-    # if current_user && user.id == logged_user.id
-      # get current users messages
-      @messages = user.sent_messages.recent || []
+    @messages = user.sent_messages.recent || []
 
-      # binding.pry
-    # else
-    #   redirect_to root_path
-    # end
+  end
+
+  def show
+    @message = Message.find_by_id(params[:id])
+    @message.update(read_at: Time.now)
   end
 end

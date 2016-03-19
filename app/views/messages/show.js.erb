@@ -1,0 +1,6 @@
+$("#msg-<%=@message.id%>").removeClass('unread-message')
+
+var messageId = localStorage.getItem('lastReadMsg')
+console.log(messageId)
+$("#msg-" + messageId).hide('slow')
+localStorage.setItem('lastReadMsg', '<%=@message.id%>')

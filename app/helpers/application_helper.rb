@@ -11,4 +11,6 @@ module ApplicationHelper
     # binding.pry
     message.read_at ? '' : 'unread-message'
   end
+
+
 end

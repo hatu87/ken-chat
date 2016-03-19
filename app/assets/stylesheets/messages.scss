@@ -1,3 +1,19 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.msg-avatar {
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+}
+
+.collapsible-header .msg-avatar{
+
+}
+
+.collapsible-header .msg-title {
+  height: 75px;
+  vertical-align: middle;
+  display: inline-block;
+}
