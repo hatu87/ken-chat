@@ -18,4 +18,9 @@ class MessagesController < ApplicationController
     @message = Message.find_by_id(params[:id])
     @message.update(read_at: Time.now)
   end
+
+  def create
+
+  end
+
 end

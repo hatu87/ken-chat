@@ -40,28 +40,33 @@
 <div id="modal1" class="modal modal-fixed-footer">
   <div class="modal-content">
     <h4>New Message</h4>
-
-      <div class="row">
-        <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">From</label>
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">To</label>
+        <div class="row">
+          <div class="input-field col s12">
+            <select class="icons" multiple>
+              <option value="" disabled selected>Choose your option</option>
+              <option value="" data-icon="images/sample-1.jpg" class="left circle">example 1</option>
+              <option value="" data-icon="images/office.jpg" class="left circle">example 2</option>
+              <option value="" data-icon="images/yuna.jpg" class="left circle">example 3</option>
+            </select>
+            <label>Images in select</label>
+          </div>
         </div>
-      </div>
-    </form>
-      </div>
-    </form>
-    <p>A bunch of text</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat teal ">Send</a>
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
-  </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1">Message</label>
+          </div>
+        </div>
+      </form>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat teal ">Send</a>
+  <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Cancel</a>
+</div>
 </div>
