@@ -15,6 +15,9 @@ class Message < ActiveRecord::Base
   scope :unread, ->(recipient_id) { joins(:message_recipients)
                                     .where(message_recipients:
                                            {read_at: nil, recipient_id: recipient_id}) }
+  scope :from_unblocked, ->(recipient_id) {
+                                where.not(
+                                    sender_id: Block.blocked_users(recipient_id).pluck(:blocked_user_id))}
 
 
   # callbacks

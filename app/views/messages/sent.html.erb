@@ -17,20 +17,8 @@
     </div>
     <div class="col s9">
       <div class="row">
-        <ul class="collection ">
-          <% @messages.each do |msg| %>
-          <li class="collection-item avatar <%= unread_style(msg) %>">
-            <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
-            <% if msg.unread? %>
-            <span class="badge">Unread</span>
-            <% else %>
-            <%= msg.read_at.to_formatted_s(:short) %>
-            <% end %>
-            <span class="title"><%= msg.sender.name %></span>
-            <p><%= msg.content %>
-            </p>
-          </li>
-          <% end %>
+        <ul id="messages" class="collapsible popout" data-collapsible="accordion">
+          <%= render partial: 'messages', object: @messages %>
         </ul>
       </div>
     </div>

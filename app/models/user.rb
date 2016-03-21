@@ -30,8 +30,11 @@ class User < ActiveRecord::Base
     join_table: :blocks, foreign_key: :id
 
   # list of users who are blocked by this user
-  has_and_belongs_to_many :blocked_users, class_name: :User,
-    join_table: :blocks, association_foreign_key: :blocked_user_id
+  has_many :blocks
+  has_many :blocked_users, class_name: :User, through: :blocks
+
+  # has_and_belongs_to_many :blocked_users, class_name: :User,
+  #   join_table: :blocks, association_foreign_key: :blocked_user_id
 
 
   # validations
@@ -50,8 +53,8 @@ class User < ActiveRecord::Base
     !friends.find_by_id(friend.id).nil?
   end
 
-  def block?(friend)
-    # !blocked_users.
+  def block?(user)
+    !blocked_users.find_by_id(user.id).nil?
   end
 
   # callback handler for login with facebook
@@ -63,7 +66,7 @@ class User < ActiveRecord::Base
     # and figure out how to get email for this user.
     # Note that Facebook sometimes does not return email,
     # in that case you can use facebook-id@facebook.com as a workaround
-    binding.pry
+    # binding.pry
     # find users by uid
 
     email = auth[:info][:email] || "#{auth[:uid]}@facebook.com"

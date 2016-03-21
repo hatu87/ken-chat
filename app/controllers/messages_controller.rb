@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
     # binding.pry
     user = User.find(params[:user_id])
     logged_user = current_user
-    @messages = Message.unread(user.id).recent.page(params[:page]).per(5)
+    @messages = Message.from_unblocked(user.id).unread(user.id).recent.page(params[:page]).per(5)
   end
 
   def sent

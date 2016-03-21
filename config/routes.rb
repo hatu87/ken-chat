@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'blocks/create'
+
   # root
   root 'home#index'
 
@@ -19,5 +21,6 @@ Rails.application.routes.draw do
     end
 
     resources :friends
+    resources :blocks
   end
 end

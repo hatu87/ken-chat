@@ -5,9 +5,8 @@
         <li>
           <div class="fixed-action-btn" style="bottom: 16px; right: 16px;">
             <%= link_to new_user_message_path, class:'btn-floating btn-large red' do %>
-              <i class="large material-icons">mode_edit</i>
+            <i class="large material-icons">mode_edit</i>
             <% end %>
-
           </div>
         </li>
         <li><%= link_to 'Incomming Messages', user_messages_path %></li>
@@ -23,11 +22,22 @@
           <li class="collection-item avatar %>">
             <%= image_tag friend.avatar_url || 'http://placehold.it/100x100', class:'circle avatar' %>
             <span class="title"><%= friend.name %></span>
-            <% if !current_user.friend?(friend) %>
-            <a href="#!" class="secondary-content"><%= button_to 'Add Friend', user_friends_path, params:{friend_id: friend.id}, method: :post, class:'btn' %></a>
-            <% end %>
-            <% unless current_user.block?(friend) %>
-            <% end %>
+            <a href="#!" class="secondary-content">
+              <table>
+                <tr>
+                  <td><% if !current_user.friend?(friend) %>
+                    <%= button_to 'Add Friend', user_friends_path, params:{friend_id: friend.id}, method: :post, class:'btn' %>
+                  <% end %></td>
+                  <td>
+                    <% if current_user.block?(friend) %>
+                      <%= button_to 'Unblock', user_block_path(current_user_id, friend.id), params:{blocked_user_id: friend.id}, method: :delete, class:'btn red' %>
+                    <% else %>
+                      <%= button_to 'Block', user_blocks_path, params:{blocked_user_id: friend.id}, method: :post, class:'btn red' %>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </a>
           </li>
           <% end %>
         </ul>
