@@ -17,4 +17,5 @@
 //= require materialize-tags
 //= require typeahead
 //= require typeahead.jquery
+//= require jquery.infinite-pages
 //= require_tree .

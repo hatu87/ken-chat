@@ -1,0 +1,12 @@
+// Append new data
+// debugger
+$("<%=j render(:partial => 'messages', :object => @messages) %>")
+  .appendTo($("#messages"));
+
+// Update pagination link
+<% if @messages.last_page? %>
+  $('.pagination').html("That's all, folks!");
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@messages, 'Next Page', :remote => true) %>");
+<% end %>

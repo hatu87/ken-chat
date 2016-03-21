@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     !friends.find_by_id(friend.id).nil?
   end
 
+  def block?(friend)
+    # !blocked_users.
+  end
+
   # callback handler for login with facebook
   # 1. user is existed with a linked facebook account
   # 2. user is existed but not facebook account

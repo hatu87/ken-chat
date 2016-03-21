@@ -26,6 +26,8 @@
             <% if !current_user.friend?(friend) %>
             <a href="#!" class="secondary-content"><%= button_to 'Add Friend', user_friends_path, params:{friend_id: friend.id}, method: :post, class:'btn' %></a>
             <% end %>
+            <% unless current_user.block?(friend) %>
+            <% end %>
           </li>
           <% end %>
         </ul>

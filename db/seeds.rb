@@ -22,7 +22,7 @@ User.create!(name:'ken', email:'ken.hoang87@gmail.com', password:'123', password
 end
 
 User.all.each do |recipient|
-  5.times do |i|
+  50.times do |i|
     message = Message.create(content: Faker::Lorem.paragraph,
       created_at:Faker::Time.between(DateTime.now - 7, DateTime.now))
 

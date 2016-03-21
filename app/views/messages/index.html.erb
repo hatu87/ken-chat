@@ -16,22 +16,12 @@
     </div>
     <div class="col s9">
       <div class="row">
-        <ul class="collapsible popout" data-collapsible="accordion">
-          <% @messages.each do |msg| %>
-          <li id="msg-<%=msg.id%>" class="<%= unread_style(msg) %>">
-            <%= link_to user_message_path(current_user_id, msg.id, format: :js), class:'collapsible-header', remote:true do %>
-            <%= image_tag msg.sender.avatar_url || 'http://placehold.it/100x100', class:'circle msg-avatar' %>
-            <span class="msg-title"><%= msg.sender.name %></span>
-            <div href="#!" class="right"><%= msg.created_at.to_formatted_s(:short) %></div>
-            <% end %>
-            <% if msg.unread?(current_user_id) %>
-            <div class="collapsible-body"><p id="content-<%= msg.id%>"></p></div>
-            <% else %>
-            <div class="collapsible-body"><p>You have already read this message</p></div>
-            <% end %>
-          </li>
-          <% end %>
+        <ul id="messages" class="collapsible popout" data-collapsible="accordion">
+          <%= render partial: 'messages', object: @messages %>
         </ul>
+        <p class="pagination">
+          <%= link_to_next_page(@messages, 'Next Page', :remote => true) %>
+        </p>
       </div>
     </div>
   </div>
