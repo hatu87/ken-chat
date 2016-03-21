@@ -8,12 +8,14 @@ Rails.application.routes.draw do
   post 'logout', to: 'sessions#destroy'
   get 'register', to: 'users#new'
   post 'register', to: 'users#create'
+  get 'auth/:provider/callback' => 'sessions#callback'
 
   # current logged user
 
   resources :users do
     resources :messages do
       get 'sent', to: 'messages#sent', on: :collection
+      post 'notify_message_read', to: 'messages#notify_message_read'
     end
 
     resources :friends

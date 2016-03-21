@@ -1,0 +1,34 @@
+<div class="container">
+<% if @message.unread?(current_user_id) %>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="card darken-1">
+        <div class="card-content">
+          <span class="card-title"><%= @message.sender.name %></span>
+          <p><%= @message.content %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to 'Show all message', user_messages_path(user_id: current_user_id)  %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% else %>
+  You have already read this message.
+<% end %>
+
+</div>
+
+<script type="text/javascript">
+$.ajax({
+  method: "POST",
+  url: '<%= user_message_notify_message_read_path(current_user_id, @message.id) %>',
+  data: {
+    recipient_id: <%= current_user_id %>
+  }
+}).done(function( msg ) {
+    console.log('updated read at');
+  });
+
+</script>

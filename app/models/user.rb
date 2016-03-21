@@ -3,12 +3,19 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  # enum
+  enum status: [:registered, :unregistered]
+
   # associations
   has_many :accounts
   has_many :sent_messages, foreign_key: :sender_id, class_name: :Message
-  has_and_belongs_to_many :received_messages, class_name: :Message,
-    join_table: :message_recipients,
-    foreign_key: :recipient_id
+  # has_and_belongs_to_many :received_messages, class_name: :Message,
+  #   join_table: :message_recipients,
+  #   foreign_key: :recipient_id
+
+  has_many :message_recipients, foreign_key: :recipient_id
+  has_many :received_messages, class_name: :Message,
+    through: :message_recipients, source: :message
 
   # list of friends
   # has_many :friends, class_name: :User, through: :friends, foreign_key: 'friend_id'

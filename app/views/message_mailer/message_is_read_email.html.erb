@@ -1,0 +1,9 @@
+<html>
+<head>
+  <title>Message Received | Ken Chat</title>
+</head>
+<body>
+Hi, <strong><%= @message.sender.name %></strong> <br/>
+  Your message sent to <strong><%= @recipient.name %></strong> has been read at <%= @message.read_at.to_formatted_s(:short) %>
+</body>
+</html>

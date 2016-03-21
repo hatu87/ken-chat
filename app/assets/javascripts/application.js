@@ -14,4 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require materialize
+//= require materialize-tags
+//= require typeahead
+//= require typeahead.jquery
 //= require_tree .

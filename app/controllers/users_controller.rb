@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action :skip_if_signed_in, only: [:new, :create]
+  # before_action :skip_if_signed_in, only: [:new, :create]
 
   def create
-    @user = User.new(user_params)
+
+    @user = User.find_by_email(user_params[:email])
+    if @user.nil?
+      @user = User.new(user_params)
+    else
+      @user.assign_attributes(user_params)
+    end
+
     # byebug
     if @user.save
       flash[:success] = "User is created"

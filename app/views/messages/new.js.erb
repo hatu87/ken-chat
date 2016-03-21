@@ -1,0 +1,23 @@
+$('#modal1').openModal();
+
+
+var raw = [{'name':'dummy'}, {'name': 'tags'}, {'name':'galore'}];
+var dummyTags = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.whitespace,
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  local: raw
+});
+
+dummyTags.initialize();
+$("#emails").materialtags({
+
+  typeaheadjs: {
+    name: 'citynames',
+            displayKey: 'name',
+            valueKey: 'name',
+    source: dummyTags.ttAdapter()
+  }
+});
+
+// dummyTags.initialize();
+// $('input').typeahead({ source:dummyTags });

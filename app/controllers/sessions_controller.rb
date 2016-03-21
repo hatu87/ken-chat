@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
-  before_action :skip_if_signed_in, only: [:new, :create]
+  # before_action :skip_if_signed_in, only: [:new, :create]
 
   # show login form
   def new
@@ -32,6 +32,14 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     redirect_to root_path
+  end
+
+  def callback
+    if user = User.from_omniauth(env["omniauth.auth"])
+      # log in user here
+    else
+      # don't log user in
+    end
   end
 
   private

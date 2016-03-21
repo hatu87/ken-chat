@@ -1,6 +1,17 @@
 $("#msg-<%=@message.id%>").removeClass('unread-message')
+$("#content-<%= @message.id%>").html('<%= @message.content %>')
 
 var messageId = localStorage.getItem('lastReadMsg')
 console.log(messageId)
 $("#msg-" + messageId).hide('slow')
 localStorage.setItem('lastReadMsg', '<%=@message.id%>')
+
+$.ajax({
+  method: "POST",
+  url: '<%= user_message_notify_message_read_path(current_user_id, @message.id) %>',
+  data: {
+    recipient_id: <%= current_user_id %>
+  }
+}).done(function( msg ) {
+    console.log('updated read at');
+  });

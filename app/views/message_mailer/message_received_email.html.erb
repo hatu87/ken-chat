@@ -1,0 +1,20 @@
+<html>
+<head>
+  <title>Message Received | Ken Chat</title>
+</head>
+<body>
+
+<% if @recipient.unregistered? %>
+  Hi, <br/>
+  You have received an message from @message.sender.name <br/>
+  You can view this message by register for account with this link:
+  <%= link_to register_path, register_path %>
+<% else %>
+  Hi, <strong><%= @recipient.name %></strong> <br/>
+  You have received an message from @message.sender.name <br/>
+  You can view this message by clicking this link:
+  <%= link_to user_message_url(@recipient.id, @message.id, format: :html), user_message_url(@recipient.id, @message.id, format: :html) %>
+<% end %>
+
+</body>
+</html>
