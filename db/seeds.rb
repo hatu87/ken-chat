@@ -10,7 +10,9 @@ User.delete_all
 Account.delete_all
 Message.delete_all
 MessageRecipient.delete_all
-
+Friend.delete_all
+Block.delete_all
+Attachment.delete_all
 
 User.create!(name:'ken', email:'ken.hoang87@gmail.com', password:'123', password_confirmation:'123')
 10.times do |i|
@@ -35,9 +37,9 @@ User.all.each do |recipient|
 end
 
 # add friends
-User.all.each do |user|
-  5.times do |i|
-    friend = User.find(rand(User.first.id..User.last.id))
-    user.friends << friend
-  end
-end
+# User.all.each do |user|
+#   5.times do |i|
+#     friend = User.find(rand(User.first.id..User.last.id))
+#     user.friends << friend
+#   end
+# end

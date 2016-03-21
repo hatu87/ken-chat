@@ -10,4 +10,12 @@ class FriendsController < ApplicationController
 
     redirect_to user_friends_path
   end
+
+  def destroy
+
+    friend = Friend.find_by_user_id_and_friend_id(current_user_id, params[:friend_id])
+    friend.destroy
+
+    redirect_to user_friends_path
+  end
 end

@@ -25,9 +25,13 @@
             <a href="#!" class="secondary-content">
               <table>
                 <tr>
-                  <td><% if !current_user.friend?(friend) %>
-                    <%= button_to 'Add Friend', user_friends_path, params:{friend_id: friend.id}, method: :post, class:'btn' %>
-                  <% end %></td>
+                  <td>
+                    <% if current_user.friend?(friend) %>
+                        <%= button_to 'Remove Friend', user_friend_path(current_user_id, friend.id), params:{friend_id: friend.id}, method: :delete, class:'btn' %>
+                      <% else %>
+                        <%= button_to 'Add Friend', user_friends_path, params:{friend_id: friend.id}, method: :post, class:'btn' %>
+                    <% end %>
+                  </td>
                   <td>
                     <% if current_user.block?(friend) %>
                       <%= button_to 'Unblock', user_block_path(current_user_id, friend.id), params:{blocked_user_id: friend.id}, method: :delete, class:'btn red' %>

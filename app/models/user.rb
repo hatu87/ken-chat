@@ -18,12 +18,9 @@ class User < ActiveRecord::Base
     through: :message_recipients, source: :message
 
   # list of friends
-  # has_many :friends, class_name: :User, through: :friends, foreign_key: 'friend_id'
-  has_and_belongs_to_many :friends, class_name: :User,
-    join_table: :friends,
-    foreign_key: :friend_id
-
-  # has_many :be_friends, class_name: :User, through: :friends
+  has_many :friends_users, class_name: :Friend
+  has_many :friends, through: :friends_users
+  # has_many :friends_users, class_name: :User, through: :friends, source: :user
 
   # list of users who block this user
   has_and_belongs_to_many :blocking_users, class_name: :User,
