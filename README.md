@@ -43,6 +43,8 @@ The following **additional** features are implemented:
 - [x] Animations and material design ui.
 - [x] Remember facebook account and its messages.
 - [x] Use Rails AJAX.
+- [x] Use figaro gem to manage environment variables
+
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
