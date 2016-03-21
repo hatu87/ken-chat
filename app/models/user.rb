@@ -49,4 +49,51 @@ class User < ActiveRecord::Base
     # binding.pry
     !friends.find_by_id(friend.id).nil?
   end
+
+  # callback handler for login with facebook
+  # 1. user is existed with a linked facebook account
+  # 2. user is existed but not facebook account
+  # 3. user is not existed, return nil
+  def self.from_omniauth(auth)
+    # Check out the Auth Hash function at https://github.com/mkdynamic/omniauth-facebook#auth-hash
+    # and figure out how to get email for this user.
+    # Note that Facebook sometimes does not return email,
+    # in that case you can use facebook-id@facebook.com as a workaround
+    binding.pry
+    # find users by uid
+
+    email = auth[:info][:email] || "#{auth[:uid]}@facebook.com"
+    account = Account.find_by_uid(auth[:uid])
+
+    if account.nil?
+      # do not have facebook acccount
+      # check if user is existed by email
+      existed_user = User.find_by_email(email)
+
+      existed_user && existed_user.accounts.create(uid: auth[:uid], provider: auth[:provider]).user
+      # if existed_user.nil?
+      #   # cannot find old email. Your account is not existed
+      #   # create new user & account
+      #   existed_user = User.create(name: auth[:info][:name], email: email,
+      #     password: '123', password_confirmation: '123')
+      # end
+
+      # existed_user.accounts.create(uid: auth[:uid], provider: auth[:provider])
+
+      # existed_user
+    else
+      # facebook account is existed
+      account.user
+    end
+
+    # user = account && (account.user || )
+    # user = where(email: email).first_or_initialize
+    # user.accounts.build(uid: auth[:uid], provider: auth[:provider])
+    # #
+    # # Set other properties on user here.
+    # # You may want to call user.save! to figure out why user can't save
+    # #
+    # # Finally, return user
+    # user.save && user
+  end
 end

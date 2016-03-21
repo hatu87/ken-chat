@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
   def index
     user = User.find(params[:user_id])
     logged_user = current_user
-    @messages = user.received_messages.unread.recent
+    @messages = Message.unread(user.id).recent
   end
 
   def sent

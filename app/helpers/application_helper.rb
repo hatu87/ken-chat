@@ -9,7 +9,7 @@ module ApplicationHelper
 
   def unread_style(message)
     # binding.pry
-    message.read_at ? '' : 'unread-message'
+    message.unread? ? 'unread-message' : ''
   end
 
 

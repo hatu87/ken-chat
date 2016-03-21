@@ -32,6 +32,8 @@ gem 'faker'
 gem 'pry-byebug'
 gem 'omniauth'
 gem 'omniauth-facebook', '~> 3.0.0'
+gem 'kaminari'
+gem 'jquery-infinite-pages'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

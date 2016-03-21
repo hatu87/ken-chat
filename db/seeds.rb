@@ -7,7 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.delete_all
+Account.delete_all
 Message.delete_all
+MessageRecipient.delete_all
+
 
 User.create!(name:'ken', email:'ken.hoang87@gmail.com', password:'123', password_confirmation:'123')
 10.times do |i|

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login, only: [:new, :create]
+  skip_before_action :require_login, only: [:new, :create, :callback]
   # before_action :skip_if_signed_in, only: [:new, :create]
 
   # show login form
@@ -37,8 +37,13 @@ class SessionsController < ApplicationController
   def callback
     if user = User.from_omniauth(env["omniauth.auth"])
       # log in user here
+      # binding.pry
+      session[:user_id] = user.id
+      redirect_to user_messages_path(user.id)
     else
       # don't log user in
+      flash[:error] = 'Your account is not existed. Please sign in with the Facebook account with its email in our system.'
+      render 'new'
     end
   end
 

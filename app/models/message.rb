@@ -12,27 +12,41 @@ class Message < ActiveRecord::Base
   validates :sender, presence: true
 
   scope :recent, -> { order(created_at: :desc) }
-  scope :unread, -> { where(read_at: nil) }
+  scope :unread, ->(recipient_id) { joins(:message_recipients)
+                                    .where(message_recipients:
+                                           {read_at: nil, recipient_id: recipient_id}) }
 
 
   # callbacks
   before_create :set_emails
 
-  def unread?(recipient_id)
+  def unread?(recipient_id = nil)
+    recipient_id.nil? ? unread_all? : unread_recipient?(recipient_id)
+  end
+
+  def unread_recipient?(recipient_id)
     message_recipient = message_recipients.find_by_recipient_id(recipient_id)
     !message_recipient.nil? && message_recipient.read_at.nil?
   end
 
-  def unread?
+  def unread_all?
     message_recipients.where.not(read_at: nil).count == 0
   end
 
   def mark_as_read(recipient_id)
-   message_recipient = message_recipients.find_by_recipient_id(recipient_id)
-   message_recipient.update(read_at: Time.now)
+    message_recipient = message_recipients.find_by_recipient_id(recipient_id)
+    message_recipient.update(read_at: Time.now)
   end
 
-  def read_at
+  def read_at(recipient_id = nil)
+    recipient_id.nil? ? read_at_last : read_at_recipient(recipient_id)
+  end
+
+  def read_at_recipient(recipient_id)
+    message_recipients.select(:read_at).order(read_at: :desc).where(recipient_id: recipient_id).first
+  end
+
+  def read_at_last
     message_recipients.select(:read_at).order(read_at: :desc).first
   end
 
@@ -41,19 +55,19 @@ class Message < ActiveRecord::Base
 
     unless emails_string.nil?
       emails_string.split(',').each do |item|
-        binding.pry
+        # binding.pry
         recipient = User.find_by_email(item)
 
         unless recipient.nil?
           # user is existed
-          binding.pry
+          # binding.pry
           recipients << recipient
         else
           # Rails.logger.warning "#{item} is not existed"
           # user is not existed
           # check if email is valid
           # if valid create an unregisterd user
-          binding.pry
+          # binding.pry
           recipient = User.new(email: item)
           recipient.save(validate: false)
           recipients << recipient

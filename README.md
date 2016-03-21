@@ -27,7 +27,7 @@ The following **optional** functionality is complete:
 
 * [ ] User can attach an image.
 * [x] User can have multiple recipients on one message.
-* [ ] User can log in with Facebook.
+* [x] User can log in with Facebook.
 * [ ] Use of the [kaminari gem](https://github.com/amatsuda/kaminari) and [jquery-infinite-pages gem](https://github.com/magoosh/jquery-infinite-pages) to implement Infinite Scroll.
 * [x] User gets an email when they receive a message, with a link to view the message.
 * [x] User gets an email when a message they have sent is read with the time at which the message was read.
@@ -41,6 +41,8 @@ The following **additional** features are implemented:
 - [x] Use nokogiri and overload the field_error_proc to replace the default fiele_with_errors with materializecss error pattern.
 - [x] Use localStorage to store the last message id, which will be remove when read another message.
 - [x] Animations and material design ui.
+- [x] Remember facebook account and its messages.
+- [x] Use Rails AJAX.
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
